@@ -1,0 +1,61 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 24px;
+  background-color: grey;
+  margin: 0;
+  overflow: hidden;
+}
+
+button {
+  height: 100px;
+  width: 200px;
+  max-height: 300px;
+  border: 10px solid black;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+.score-board {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  border: 10px solid black;
+  padding: 50px;
+  gap: 30px;
+  align-items: center;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.round-info {
+  display: flex;
+  margin: 100px 0;
+  font-size: 40px;
+}
+
+.scores {
+  display: flex;
+  gap: 100px;
+}
+
+.choices {
+  display: flex;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding: 200px 50px 50px 50px;
+}
+.footer {
+  display: flex;
+  background-color: beige;
+  justify-content: center;
+  margin: 300px 0 0 0;
+  align-items: flex-end;
+}

@@ -1,7 +1,9 @@
 // TO DO LIST
-// 1.) Refactor css/html and use query selector for buttons
+// 1.) emulate selection choice to UI
 // 2.) find out why  game isn't ending with conditional of 5pts
-// 3.) why does innerhtml/textcontent work when being applied to queryselector but not getelementbyclassname
+// 3.) represent round outcomes in UI
+// 4.) new date in copyright
+// 5.) make footer absolute so it stays at bottom of page
 
 let pScore = 0;
 let cScore = 0;
@@ -24,17 +26,17 @@ const getComputerChoice = function () {
 
 const playRound = function () {
   const computerChoice = getComputerChoice();
-  const pc =
+  const playerChoice =
     this.textContent[0].toUpperCase() + this.textContent.slice(1).toLowerCase();
-  console.log(`You chose ${pc}`);
+  console.log(`You chose ${playerChoice}`);
   console.log(`Computer chose ${computerChoice}`);
-  if (pc === computerChoice) {
+  if (playerChoice === computerChoice) {
     console.log("Its a Draw");
     // return "Its a Draw!";
   } else if (
-    (pc === "Rock" && computerChoice === "Paper") ||
-    (pc === "Paper" && computerChoice === "Scissors") ||
-    (pc === "Scissors" && computerChoice === "Rock")
+    (playerChoice === "Rock" && computerChoice === "Paper") ||
+    (playerChoice === "Paper" && computerChoice === "Scissors") ||
+    (playerChoice === "Scissors" && computerChoice === "Rock")
   ) {
     cScore++;
     updateScores();
