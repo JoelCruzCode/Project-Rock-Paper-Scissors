@@ -7,6 +7,7 @@
 
 let pScore = 0;
 let cScore = 0;
+let info;
 const player = document.querySelector(".player");
 const computer = document.querySelector(".computer");
 const choices = ["Rock", "Paper", "Scissors"];
@@ -14,93 +15,60 @@ const rock = document.querySelector("rock");
 const paper = document.querySelector("paper");
 const scissors = document.querySelector("scissors");
 const buttons = document.querySelectorAll("button");
+const result = document.querySelector(".result");
 
-const updateScores = function () {
+const updateScores = function (info) {
   player.textContent = `Player Score = ${pScore}`;
   computer.textContent = `Computer score = ${cScore}`;
+  result.textContent = `${info}`;
 };
 
 const getComputerChoice = function () {
   return choices[Math.trunc(Math.random() * choices.length)];
 };
 
-const playRound = function () {
+const checkWinner = function () {
+  if (pScore === 5) {
+    result.textContent = "Game Over, You Win!";
+  }
+  if (cScore === 5) {
+    result.textContent = "Game Over, You lose!";
+  }
+};
+
+const play = function () {
   const computerChoice = getComputerChoice();
   const playerChoice =
     this.textContent[0].toUpperCase() + this.textContent.slice(1).toLowerCase();
-  console.log(`You chose ${playerChoice}`);
-  console.log(`Computer chose ${computerChoice}`);
+  document.querySelector(".player-choice").textContent = playerChoice;
+  document.querySelector(".computer-choice").textContent = computerChoice;
+
   if (playerChoice === computerChoice) {
-    console.log("Its a Draw");
+    info = `Round Over: Draw`;
+    updateScores(info);
     // return "Its a Draw!";
   } else if (
     (playerChoice === "Rock" && computerChoice === "Paper") ||
     (playerChoice === "Paper" && computerChoice === "Scissors") ||
     (playerChoice === "Scissors" && computerChoice === "Rock")
   ) {
+    info = `Round Over: You lost `;
     cScore++;
-    updateScores();
+
+    updateScores(info);
     // return "You Lose!";
   } else {
     pScore++;
-    updateScores();
+    info = `Round Over: You win`;
+    updateScores(info);
     // return "You Win!";
   }
+  checkWinner();
 };
 
-buttons.forEach((btn) => btn.addEventListener("click", playRound));
+const game = function () {
+  buttons.forEach((btn) => btn.addEventListener("click", play));
+  console.log(pScore, cScore);
+};
 
-// this isnt working for some reason
-if (pScore == 5) {
-  console.log("*****Game over, you win*****");
-}
-if (cScore == 5) {
-  console.log("*****Game over, you lose*****");
-}
-
-////////////////////////////////////////////////////
-// const game = function () {
-//   for (i = 0; i < 5; i++) {
-//     const playerChoice = prompt('Choose between "Rock", "Paper" or "Scissors"');
-//     const computerChoice = getComputerChoice();
-//     console.log(playRound(playerChoice, computerChoice));
-//     console.log(`Current score is player: ${pScore} | Computer: ${cScore}`);
-//   }
-//   if (pScore === cScore) {
-//     console.log("*****Game over, Its a Draw!*****");
-//   } else if (pScore < cScore) {
-//     console.log(C);
-//   } else {
-//     console.log("*****Game over, you win*****");
-//   }
-// };
-
-// const game = function () {
-//   playRound();
-//   for (i = 0; i < 5; i++) {
-//     console.log(`Current score is player: ${pScore} | Computer: ${cScore}`);
-//     if (pScore === cScore) {
-//       console.log("*****Game over, Its a Draw!*****");
-//     } else if (pScore < cScore) {
-//       console.log("****Game over, you lose!*****");
-//     } else {
-//       console.log("*****Game over, you win*****");
-//     }
-//   }
-// };
-// game();
-
-// const rock = document.createElement("button");
-// rock.style.cssText = "width: 60px; height: 30px;";
-// rock.textContent = "Rock";
-// document.body.append(rock);
-
-// const scissors = document.createElement("button");
-// scissors.style.cssText = "width: 60px; height: 30px;";
-// scissors.textContent = "Scissors";
-// document.body.append(scissors);
-
-// const paper = document.createElement("button");
-// paper.style.cssText = "width: 60px; height: 30px;";
-// paper.textContent = "Paper";
-// document.body.append(paper);
+game();
