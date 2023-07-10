@@ -7,6 +7,7 @@
 
 let pScore = 0;
 let cScore = 0;
+let round = 0;
 let info;
 const player = document.querySelector(".player");
 const computer = document.querySelector(".computer");
@@ -16,6 +17,8 @@ const paper = document.querySelector("paper");
 const scissors = document.querySelector("scissors");
 const buttons = document.querySelectorAll("button");
 const result = document.querySelector(".result");
+const resetbtn = document.createElement("button");
+resetbtn.textContent = "Play Again?";
 
 const updateScores = function (info) {
   player.textContent = `Player Score = ${pScore}`;
@@ -30,9 +33,13 @@ const getComputerChoice = function () {
 const checkWinner = function () {
   if (pScore === 5) {
     result.textContent = "Game Over, You Win!";
+    result.append(resetbtn);
+    buttons.forEach((btn) => btn.removeEventListener("click", play));
   }
   if (cScore === 5) {
     result.textContent = "Game Over, You lose!";
+    result.appendChild(resetbtn);
+    buttons.forEach((btn) => btn.removeEventListener("click", play));
   }
 };
 
@@ -44,7 +51,8 @@ const play = function () {
   document.querySelector(".computer-choice").textContent = computerChoice;
 
   if (playerChoice === computerChoice) {
-    info = `Round Over: Draw`;
+    round++;
+    info = `Round ${round}: Draw`;
     updateScores(info);
     // return "Its a Draw!";
   } else if (
@@ -52,23 +60,33 @@ const play = function () {
     (playerChoice === "Paper" && computerChoice === "Scissors") ||
     (playerChoice === "Scissors" && computerChoice === "Rock")
   ) {
-    info = `Round Over: You lost `;
+    round++;
     cScore++;
+    info = `Round ${round}: You lost `;
 
     updateScores(info);
     // return "You Lose!";
   } else {
+    round++;
     pScore++;
-    info = `Round Over: You win`;
+    info = `Round ${round}: You win`;
     updateScores(info);
     // return "You Win!";
   }
   checkWinner();
 };
 
+const resetGame = function () {
+  cScore = 0;
+  pScore = 0;
+  player.textContent = ``;
+  computer.textContent = ``;
+  result.textContent = "Fight";
+};
+
 const game = function () {
   buttons.forEach((btn) => btn.addEventListener("click", play));
-  console.log(pScore, cScore);
+  resetbtn.addEventListener("click", resetGame);
 };
 
 game();
