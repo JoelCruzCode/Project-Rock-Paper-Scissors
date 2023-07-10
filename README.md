@@ -10,4 +10,3 @@ First stage | Game in the browser console
 Second stage | Game displayed to UI
 
 - First to score 5 points wins the game
-- reload browser to play again
