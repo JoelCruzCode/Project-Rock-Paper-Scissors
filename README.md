@@ -6,3 +6,8 @@ Simple implementation of Rock Paper Scissors game from The Odin Project [curricu
 First stage | Game in the browser console
 
 - Use the console tab in Chrome DevTools to view the results
+
+Second stage | Game displayed to UI
+
+- First to score 5 points wins the game
+- reload browser to play again
